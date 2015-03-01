@@ -18,6 +18,8 @@ back2 = pygame.image.load(b1).convert() #repeats itself
 
 capture = cv2.VideoCapture(0)
 
+w = open('latest_trial_log.txt', 'w')
+
 # video recorder
 fourcc = cv2.cv.CV_FOURCC(*'MPEG')  
 video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
@@ -25,6 +27,12 @@ video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
 # record video
 x = screenWidth
 while (capture.isOpened()):
+    if pygame.time.get_ticks() > 60000:
+        w.write('Trial has ended.\n')
+        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+'seconds.\n')
+        w.write('     Date: '+time.strftime('%c')+'\n')
+        w.close()
+        break
     speed0 = 50
     speed = speed0
     if x > 0:
@@ -35,7 +43,7 @@ while (capture.isOpened()):
         x += speed
     if speed == 0:
         speed = speed0
-    if speed == 10:
+    if speed == 100:
         speed = speed0
     
 
