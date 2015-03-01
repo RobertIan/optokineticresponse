@@ -29,7 +29,8 @@ x = screenWidth
 while (capture.isOpened()):
     if pygame.time.get_ticks() > 60000:
         w.write('Trial has ended.\n')
-        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+'seconds.\n')
+        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+' seconds.\n')
+        w.write('     Speed: '+str(speed)+' pixels/ms.\n')
         w.write('     Date: '+time.strftime('%c')+'\n')
         w.close()
         break
