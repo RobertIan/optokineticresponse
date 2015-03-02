@@ -4,8 +4,8 @@ import pygame
 import sys
 import os
 import time
-from pygame.locals import *
 import cv2
+from pygame.locals import *
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -24,7 +24,7 @@ capture = cv2.VideoCapture(0)
 d = time.strftime('%m%d%Y')
 now = time.strftime('%X')
 
-#csv file open
+#open output csv file for writing or appending
 f = d+'.csv'
 try:
     fsize = os.stat(f).st_size 
@@ -43,7 +43,8 @@ video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
 x = screenWidth
 while (capture.isOpened()):
     if pygame.time.get_ticks() > 60000:
-#        w.write('Trial has ended.\n')
+#        change the following lines for outputting this data in csv format
+#        w.write('Trial has ended.\n')'
 #        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+' seconds.\n')
 #        w.write('     Speed: '+str(speed)+' pixels/ms.\n')
 #        w.write('     Date: '+time.strftime('%c')+'\n')
