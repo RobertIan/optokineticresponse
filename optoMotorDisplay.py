@@ -2,6 +2,8 @@
 
 import pygame
 import sys
+import os
+import time
 from pygame.locals import *
 import cv2
 
@@ -18,7 +20,20 @@ back2 = pygame.image.load(b1).convert() #repeats itself
 
 capture = cv2.VideoCapture(0)
 
-w = open('latest_trial_log.txt', 'w')
+#date and time variable creation
+d = time.strftime('%m%d%Y')
+now = time.strftime('%X')
+
+#csv file open
+f = d+'.csv'
+try:
+    fsize = os.stat(f).st_size 
+except FileNotFoundError:
+    w = csv.writer(open(f, 'w'), delimiter=',')
+    w.writerow(['date','trial time start','collection time','scroll speed','scroll direction'])
+else:
+    if fsize > 0:
+        w = csv.writer(open(f, 'a'), delimiter=',')
 
 # video recorder
 fourcc = cv2.cv.CV_FOURCC(*'MPEG')  
@@ -28,11 +43,11 @@ video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
 x = screenWidth
 while (capture.isOpened()):
     if pygame.time.get_ticks() > 60000:
-        w.write('Trial has ended.\n')
-        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+' seconds.\n')
-        w.write('     Speed: '+str(speed)+' pixels/ms.\n')
-        w.write('     Date: '+time.strftime('%c')+'\n')
-        w.close()
+#        w.write('Trial has ended.\n')
+#        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+' seconds.\n')
+#        w.write('     Speed: '+str(speed)+' pixels/ms.\n')
+#        w.write('     Date: '+time.strftime('%c')+'\n')
+#        w.close()
         break
     speed0 = 50
     speed = speed0
