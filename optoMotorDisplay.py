@@ -35,6 +35,9 @@ else:
     if fsize > 0:
         w = csv.writer(open(f, 'a'), delimiter=',')
 
+#set timer to pause screen every 30 seconds
+pygame.time.set_timer(USEREVENT+1, 60000)
+
 # video recorder
 fourcc = cv2.cv.CV_FOURCC(*'MPEG')  
 video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
@@ -42,7 +45,7 @@ video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
 # record video
 x = screenWidth
 while (capture.isOpened()):
-    if pygame.time.get_ticks() > 60000:
+    if pygame.time.get_ticks() > 600000:
         w.writerow([d,start,pygame.time.get_ticks(),speed,dir])
         break
     speed0 = 50
@@ -77,6 +80,9 @@ while (capture.isOpened()):
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == USEREVENT+1:
+            pygame.time.wait(30000)
+            w.writerow([d,start,pygame.time.get_ticks(),speed,dir])
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
