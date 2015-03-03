@@ -43,12 +43,7 @@ video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
 x = screenWidth
 while (capture.isOpened()):
     if pygame.time.get_ticks() > 60000:
-#        change the following lines for outputting this data in csv format
-#        w.write('Trial has ended.\n')'
-#        w.write('     Time elapsed: '+str(pygame.time.get_ticks()/1000)+' seconds.\n')
-#        w.write('     Speed: '+str(speed)+' pixels/ms.\n')
-#        w.write('     Date: '+time.strftime('%c')+'\n')
-#        w.close()
+        w.writerow([d,start,pygame.time.get_ticks(),speed,dir])
         break
     speed0 = 50
     speed = speed0
@@ -88,16 +83,16 @@ while (capture.isOpened()):
                 sys.exit()
                 break
             if event.key == pygame.K_SPACE:
-                pygame.time.wait(5000)
+                pygame.time.wait(30000)     #press spacebar to pause program for 30 seconds
             if event.key == pygame.K_r:
                 x *= -1
-                screenWidth *= -1 #press r to reverse direction
+                screenWidth *= -1           #press r to reverse direction
             if event.key == pygame.K_4:
-                speed -= 1        #press 4 to decrease speed in increment of 1
-                                  #if decreased to 0, it will revert to normal speed
+                speed -= 1                  #press 4 to decrease speed in increment of 1
+                                            
             if event.key == pygame.K_5:
-                speed += 1        #press 5 to increase speed in increment of 1
-                                  #if increased to 10, it w
+                speed += 1                  #press 5 to increase speed in increment of 1
+                                           
     
     
 capture.release()
