@@ -28,7 +28,7 @@ now = time.strftime('%X')
 f = d+'.csv'
 try:
     fsize = os.stat(f).st_size 
-except FileNotFoundError:
+except OSError:
     w = csv.writer(open(f, 'w'), delimiter=',')
     w.writerow(['date','trial time start','collection time','scroll speed','scroll direction'])
 else:
