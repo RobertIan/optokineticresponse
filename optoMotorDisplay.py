@@ -46,7 +46,7 @@ video_writer = cv2.VideoWriter("output.avi", fourcc, 20, (640, 480))
 x = screenWidth
 while (capture.isOpened()):
     if pygame.time.get_ticks() > 600000:
-        w.writerow([d,start,pygame.time.get_ticks(),speed,dir])
+        w.writerow([d,now,pygame.time.get_ticks(),speed,dir])
         break
     speed0 = 50
     speed = speed0
