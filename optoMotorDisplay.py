@@ -22,19 +22,19 @@ else:
 
 #create timers
 clock = core.Clock()
-interval1pstart = 3 #p for '+' direction
-interval1pstop = 6 
-interval1mstart = 9 #m for '-' direction
-interval1mstop = 12 
-interval2pstart = 15 
-interval2pstop = 18
-interval2mstart = 21 
-interval2mstop = 24
-interval3pstart = 27
-interval3pstop = 30
-interval3mstart = 33
-interval3mstop = 36
-triallength = 39
+interval1pstart = 30 #p for '+' direction
+interval1pstop = 60 
+interval1mstart = 90 #m for '-' direction
+interval1mstop = 120 
+interval2pstart = 150 
+interval2pstop = 180
+interval2mstart = 210 
+interval2mstop = 240
+interval3pstart = 270
+interval3pstop = 300
+interval3mstart = 330
+interval3mstop = 360
+triallength = 390
 
 #create a window
 fullscreen = (1920, 1080)
