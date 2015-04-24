@@ -15,16 +15,19 @@ try:
     fsize = os.stat(f).st_size 
 except OSError:
     w = csv.writer(open(f, 'w'), delimiter=',')
-    w.writerow(['date','trial time start','collection time','scroll speed','scroll direction','stimulus type'])
+    w.writerow(['date','trial time start','stimuli interval (start - stop)','scroll speed','scroll direction','stimulus type'])
 else:
     if fsize > 0:
         w = csv.writer(open(f, 'a'), delimiter=',')
 
+#set a phase advancement value
+phase_val = 0.05
+
 #create timers
 clock = core.Clock()
-interval1pstart = 30 #p for '+' direction
+interval1pstart = 30    #p for '+' direction
 interval1pstop = 60 
-interval1mstart = 90 #m for '-' direction
+interval1mstart = 90    #m for '-' direction
 interval1mstop = 120 
 interval2pstart = 150 
 interval2pstop = 180
@@ -49,45 +52,51 @@ opto3 = visual.GratingStim(win=win2, size=fullscreen, tex='sqr', pos=[0,0], sf=2
 while 1:
     print clock.getTime()
     if interval1pstart<clock.getTime()<interval1pstop : #this creates a never-ending loop
-        opto1.setPhase(0.05, '+')#advance phase by 0.05 of a cycle
+        opto1.setPhase(phase_val, '+')#advance phase by 0.05 of a cycle
         opto1.color -= [0.001, 0.001, 0.001]
         opto1.draw()
         win2.flip()
+    w.writerow([d,now,interval1pstop-interval1pstart,phase_val,'+','opto1'])
     if interval1pstop<clock.getTime()<interval1mstart : #this creates a never-ending loop
         win2.flip()
     if interval1mstart<clock.getTime()<interval1mstop : #this creates a never-ending loop
-        opto1.setPhase(0.05, '-')#advance phase by 0.05 of a cycle
+        opto1.setPhase(phase_val, '-')#advance phase by 0.05 of a cycle
         opto1.color -= [0.001, 0.001, 0.001]
         opto1.draw()
         win2.flip()
+    w.writerow([d,now,interval1mstop-interval1mstart,phase_val,'-','opto1'])
     if interval1mstop<clock.getTime()<interval2pstart : #this creates a never-ending loop
         win2.flip()
     if interval2pstart<clock.getTime()<interval2pstop : #this creates a never-ending loop
-        opto2.setPhase(0.05, '+')#advance phase by 0.05 of a cycle
+        opto2.setPhase(phase_val, '+')#advance phase by 0.05 of a cycle
         opto2.color -= [0.001, 0.001, 0.001]
         opto2.draw()
         win2.flip()
+    w.writerow([d,now,interval2pstop-interval2pstart,phase_val,'+','opto2'])
     if interval2pstop<clock.getTime()<interval2mstart : #this creates a never-ending loop
         win2.flip()
     if interval2mstart<clock.getTime()<interval2mstop : #this creates a never-ending loop
-        opto2.setPhase(0.05, '-')#advance phase by 0.05 of a cycle
+        opto2.setPhase(phase_val, '-')#advance phase by 0.05 of a cycle
         opto2.color -= [0.001, 0.001, 0.001]
         opto2.draw()
         win2.flip()
+    w.writerow([d,now,interval2mstop-interval2mstart,phase_val,'-','opto2'])
     if interval2mstop<clock.getTime()<interval3pstart : #this creates a never-ending loop
         win2.flip()
     if interval3pstart<clock.getTime()<interval3pstop : #this creates a never-ending loop
-        opto3.setPhase(0.05, '+')#advance phase by 0.05 of a cycle
+        opto3.setPhase(phase_val, '+')#advance phase by 0.05 of a cycle
         opto3.color -= [0.001, 0.001, 0.001]
         opto3.draw()
         win2.flip()
+    w.writerow([d,now,interval3pstop-interval3pstart,phase_val,'+','opto3'])
     if interval3pstop<clock.getTime()<interval3mstart : #this creates a never-ending loop
         win2.flip()
     if interval3mstart<clock.getTime()<interval3mstop : #this creates a never-ending loop
-        opto3.setPhase(0.05, '-')#advance phase by 0.05 of a cycle
+        opto3.setPhase(phase_val, '-')#advance phase by 0.05 of a cycle
         opto3.color -= [0.001, 0.001, 0.001]
         opto3.draw()
         win2.flip()
+    w.writerow([d,now,interval3mstop-interval3mstart,phase_val,'-','opto3'])
     if interval3mstop<clock.getTime()<triallength:
         win2.flip()
     if len(event.getKeys())>0:
