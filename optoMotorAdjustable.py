@@ -22,7 +22,7 @@ else:
         w = csv.writer(open(f, 'a'), delimiter=',')
 
 #set a phase advancement value
-phase_val = 0.05
+phase_val0 = 0.05
 phase_val = phase_val0
 #set a factor to change the phase of stimulus by when '-' or '+' is pressed
 phase_change = 0.05
