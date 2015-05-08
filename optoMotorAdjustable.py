@@ -31,7 +31,7 @@ size_change = 5000
 
 #create timers
 clock = core.Clock()
-interval1pstart = 30    #p for '+' direction
+interval1pstart = 3    #p for '+' direction
 interval1pstop = 60 
 interval1mstart = 90    #m for '-' direction
 interval1mstop = 120 
@@ -107,9 +107,6 @@ while 1:
     w.writerow([d,now,interval3mstop-interval3mstart,phase_val,'-','opto3'])
     if interval3mstop<clock.getTime()<triallength:
         win2.flip()
-    if len(event.getKeys())>0:
-        event.clearEvents()
-        break
     if triallength<clock.getTime():
         break
 
