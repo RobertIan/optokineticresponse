@@ -72,6 +72,7 @@ while not qu_it:
             direction = directioncntr
             print direction,' direction'
         if keyput=='z':
+            print 'saving settings'
             w.writerow([species,sex,age,str(phase_val),str(opto1.sf[0]),direction])
 
         if keyput=='q':
